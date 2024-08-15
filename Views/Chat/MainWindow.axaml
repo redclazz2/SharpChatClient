@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="using:SharpClient.ChatApplication"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+        x:Class="SharpClient.MainWindow"   
+        x:DataType="local:ChatData" 
+        Title="Chat App C#">
+
+    <DockPanel>
+        <Grid DockPanel.Dock="Bottom" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" /> 
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Name="MessageInput" Grid.Column="0" Height="30" Margin="0,0,5,0"/>
+            <Button Content="Send" HorizontalAlignment="Center" Grid.Column="1" Width="80" Height="30" Click="OnMessageBoxClick"/>
+        </Grid>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Column="0">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Chat" FontSize="30" FontWeight="Bold" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <ListBox ItemsSource="{Binding Messages}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding username}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding body}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </ScrollViewer>
+
+            <ScrollViewer Grid.Column="1">
+                <StackPanel Grid.Column="1" Margin="5">
+                    <TextBlock Text="Users" FontSize="30" FontWeight="Bold" HorizontalAlignment="Left" Margin="0,0,0,10"/>
+                    <ListBox ItemsSource="{Binding Users}" Grid.Column="1" Margin="5"/>
+                </StackPanel>  
+            </ScrollViewer>       
+        </Grid>
+    </DockPanel>
+</Window>
